@@ -16,7 +16,7 @@ all my cs work from [iit](https://iit.edu).
   - RISC-V assembly
 - CS 351: Systems Programming
   - Farshad Ghanei
-  - C
+  - C, x86 assembly
 - CS 425: Database Organization
   - Utkarsh Tiwari
   - SQL, Relational algebra
