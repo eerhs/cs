@@ -3,7 +3,7 @@ all my cs work from [iit](https://iit.edu).
 
 ## courses
 - CS 100: Intro to the Profession
-  - Matthew Bauer
+  - Matthew Bauer, Michael Lee
   - Java, GIT
 - CS 201: Accelerated Introduction to Computer Science
   - Chen Pengpeng
