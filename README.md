@@ -1,7 +1,7 @@
 # cs
 all my cs work from [iit](https://iit.edu).
 
-#courses
+##courses
 - CS 100: Intro to the Profession
   - Matthew Bauer
   - Java, GIT
