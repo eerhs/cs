@@ -18,5 +18,5 @@ all my cs work from [iit](https://iit.edu).
   - Farshad Ghanei
   - C, x86 assembly
 - CS 425: Database Organization
-  - Utkarsh Tiwari
+  - Utkarsh Tiwari, Yousef Elmehdwi
   - SQL, Relational algebra
