@@ -8,6 +8,8 @@ all my cs work from [iit](https://iit.edu).
 - CS 201: Accelerated Introduction to Computer Science
   - Chen Pengpeng
   - Java
+- CS 330: Discrete Structures
+  - Lan Yao
 - CS 331: Data Structures and Algorithms
   - Lan Yao
   - Python
@@ -20,3 +22,6 @@ all my cs work from [iit](https://iit.edu).
 - CS 425: Database Organization
   - Utkarsh Tiwari, Yousef Elmehdwi
   - SQL, Relational algebra
+- CS 484: Introduction to Machine Learning
+  - Shouvik Roy
+  - Python
