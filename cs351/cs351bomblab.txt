@@ -1,6 +1,0 @@
-phase 1: Houses will begat jobs, jobs will begat houses.
-phase 2: 0 1 3 6 10 15
-phase 3: 4 0
-phase 4: 7 7
-phase 5: 5 115
-phase 6: ??

@@ -1,7 +1,7 @@
 /* 
- * CS:APP Data Lab 
+ i* CS:APP Data Lab 
  * 
- * <Name - A-ID>
+ * <Shree Muthukumaran - A20507651>
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -134,7 +134,41 @@ NOTES:
 
 
 #endif
+/* Copyright (C) 1991-2022 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
 
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+/* This header is separate from features.h so that the compiler can
+   include it implicitly at the start of every compilation.  It must
+   not itself include <features.h> or any other header that includes
+   <features.h> because the implicit include comes before any feature
+   test macros that may be defined in a source file before it first
+   explicitly includes a system header.  GCC knows the name of this
+   header in order to preinclude it.  */
+/* glibc's intent is to support the IEC 559 math functionality, real
+   and complex.  If the GCC (4.9 and later) predefined macros
+   specifying compiler intent are available, use them to determine
+   whether the overall intent is to support these features; otherwise,
+   presume an older compiler has intent to support these features and
+   define these macros by default.  */
+/* wchar_t uses Unicode 10.0.0.  Version 10.0 of the Unicode Standard is
+   synchronized with ISO/IEC 10646:2017, fifth edition, plus
+   the following additions from Amendment 1 to the fifth edition:
+   - 56 emoji characters
+   - 285 hentaigana
+   - 3 additional Zanabazar Square characters */
 //1
 /* 
  * bitXor - x^y using only ~ and & 
@@ -265,7 +299,17 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
 
-  return 2;
+  int a;
+  int counter;
+  int sign = x >> 31;
+  x = (sign & (~x)) | (~sign & x);
+  a = !(x ^ 0);
+  counter = (!!(x >> 16)) << 4;
+  counter |= (!!(x >> (counter + 8))) << 3;
+  counter |= (!!(x >> (counter + 4))) << 2;
+  counter |= (!!(x >> (counter + 2))) << 1;
+  counter |= x >> (counter + 1);
+  return counter + (~a) + 3;
 }
 //float
 /* 
@@ -281,9 +325,9 @@ int howManyBits(int x) {
  */
 unsigned floatScale2(unsigned uf) {
 
-  unsigned sign = uf & 0x80000000;
-  unsigned exponent = uf & 0x7f800000;
-  unsigned fraction = uf & 0x007FFFFF;
+  int sign = uf & 0x80000000;
+  int exponent = uf & 0x7f800000;
+  int fraction = uf & 0x007FFFFF;
 
   if(exponent == 0x7F800000)
 	return uf;
@@ -343,12 +387,9 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
- 
-  if(x < -149)
-	return 0;
-  if(x < -126)
-	return 1 << (x+149);
-  if(x < 128)
-	return (x+127) << 23;
-  return 0x7f800000;
+ if(!!(x >> 31))
+      return 0;
+    if(!(x >> 7))
+      return (x + 127) << 23;
+    return (0xff << 23);
 }
