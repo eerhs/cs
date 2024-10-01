@@ -19,9 +19,21 @@ all my cs work from [iit](https://iit.edu).
 - CS 351: Systems Programming
   - Farshad Ghanei
   - C, x86 assembly
+- CS 422: Introduction to Data Mining
+  - Vijay Gurbani
+  - R, Python
 - CS 425: Database Organization
   - Utkarsh Tiwari, Yousef Elmehdwi
   - SQL, Relational algebra
+- CS 430: Introduction to Algorithms
+  - Matthew Bauer
+  - Pseudocode
+- CS 451: Parallel and Distributed Systems
+  - Ben Lenard
+  - Java
+- CS 458: Introduction to Information Security
+  - Sajad Meisami
+  - Python
 - CS 484: Introduction to Machine Learning
   - Shouvik Roy
   - Python
