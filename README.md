@@ -27,7 +27,6 @@ all my cs work from [iit](https://iit.edu).
   - SQL, Relational algebra
 - CS 430: Introduction to Algorithms
   - Matthew Bauer
-  - Pseudocode
 - CS 451: Parallel and Distributed Systems
   - Ben Lenard
   - Java
