@@ -1,5 +1,6 @@
 # cs
 all my cs work from [iit](https://iit.edu).
+*my work is defenitely not 100% accurate*
 
 ## courses
 - CS 100: Intro to the Profession
@@ -24,7 +25,7 @@ all my cs work from [iit](https://iit.edu).
   - R, Python
 - CS 425: Database Organization
   - Utkarsh Tiwari, Yousef Elmehdwi
-  - SQL, Relational algebra
+  - SQL, Relational algebra, TypeScript
 - CS 430: Introduction to Algorithms
   - Matthew Bauer
 - CS 440: Programming Languages
