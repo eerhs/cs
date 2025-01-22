@@ -27,9 +27,15 @@ all my cs work from [iit](https://iit.edu).
   - SQL, Relational algebra
 - CS 430: Introduction to Algorithms
   - Matthew Bauer
+- CS 440: Programming Languages
+  - Michael Lee
+  - Racket
 - CS 451: Parallel and Distributed Systems
   - Ben Lenard
   - Java
+- CS 456: Introduction to Wireless Networks and Performance
+  - Cindy Hood
+  - ??
 - CS 458: Introduction to Information Security
   - Sajad Meisami
   - Python
