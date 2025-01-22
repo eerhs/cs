@@ -1,6 +1,6 @@
 # cs
 all my cs work from [iit](https://iit.edu).
-*my work is defenitely not 100% accurate*
+(*my work is defenitely not 100% accurate*)
 
 ## courses
 - CS 100: Intro to the Profession
