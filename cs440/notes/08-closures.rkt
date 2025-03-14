@@ -57,10 +57,10 @@ we can use `let` to bind identifiers to lambdas. E.g.,
 (struct let-exp (ids vals body) #:transparent)
 
 ;; lambda expression
-(struct lambda-exp () #:transparent)
+(struct lambda-exp (id body) #:transparent)
 
 ;; function application
-(struct app-exp () #:transparent)
+(struct app-exp (lhs rhs) #:transparent)
 
 
 ;; Parser
@@ -84,15 +84,19 @@ we can use `let` to bind identifiers to lambdas. E.g.,
     [(list 'let (list (list id val) ...) body)
      (let-exp id (map parse val) (parse body))]
 
-    ;; lambda expressions
-    [_ (void)]
+    ;; lambda expression 
+    [(list 'lambda (list id) body)
+     (lambda-exp id (parse body))]
 
     ;; function application
-    [_ (void)]
+    [(list fn arg)
+     (app-exp (parse fn) (parse arg))]
 
     ;; basic error handling
     [_ (error (format "Can't parse: ~a" sexp))]))
 
+
+(struct closure (id body env) #:transparent)
 
 ;; Interpreter
 (define (eval expr [env '()])
@@ -121,11 +125,34 @@ we can use `let` to bind identifiers to lambdas. E.g.,
                            val))])
        (eval body (append vars env)))]
 
-    ;; lambda expression
-    [_ (void)]
+    #| 
+    ;;; dynamic scope
 
+    ;; lambda expression
+    [(lambda-exp _ _)
+      expr]
+    
     ;; function application
-    [_ (void)]
+    [(app-exp lhs rhs)
+     (let* ([fn      (eval lhs env)]
+            [fn-id   (lambda-exp-id fn)]
+            [fn-body (lambda-exp-body fn)]
+            [arg     (eval rhs env)])
+        (eval fn-body (cons (cons fn-id arg) env)))]
+    |#
+
+    ;;; lexical scope
+
+    ;; lambda expression
+    [(lambda-exp id body)
+     (closure id body env)]   ; capture current environment
+
+    ;; function application (using lexical binding)
+    [(app-exp lhs rhs)
+     (let* ([clo (eval lhs env)]
+            [arg (eval rhs env)])
+      (eval (closure-body clo) 
+            (cons (cons (closure-id clo) arg) (closure-env clo))))]
 
     ;; basic error handling
     [_ (error (format "Can't evaluate: ~a" expr))]))

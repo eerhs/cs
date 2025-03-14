@@ -10,27 +10,17 @@
 - syntax objects attach syntactical context to sexps
 ------------------------------------------------------------------------------|#
 
-(define s1 (syntax "hello world"))
+(define s #'(if #t    ;; #' is shorthand for `syntax`
+                (println " hi")
+                (println "bye")))
 
-(define s2 (syntax (foo bar 1 2 3)))
-
-(define s3 #'(foo bar 1 2 3)) ; #' is shorthand for `syntax`
-
-(define s4 #'(if (< 1 2) "true" "false"))
-
-(define s5 #`(if #,(< 1 2) "true" "false"))
-
-#; (values
-    (syntax-source s3)
-    (syntax-line s3)
-    (syntax-column s3)
-    (syntax->datum s3))
+#; (syntax-source s)
+#; (syntax-line s)
+#; (syntax-column s)
+#; (syntax->datum s)
 
 ;; `eval-syntax` evaluates syntax objects, like `eval` for sexps
-
-#; (eval-syntax s4)
-
-
+#; (eval-syntax s)
 
 #|------------------------------------------------------------------------------
 ;; Syntax transformers, aka "Macros"
@@ -38,68 +28,49 @@
 
 ;; `define-syntax` defines a macro
 
-(define-syntax say-hi
-  (lambda (stx) ; `stx` refers to the original syntax object 
-    #`(quote (hi #,stx))))
+;; define our own 'infix form' transformer
+;; e.g., (infix (1 + 2)) ==> (+ 1 2)
 
-
-(define-syntax (say-hi2 stx) ; alternate form
-  #`(quote (hi #,stx)))
-
-
-;; define a macro that supports infix notation (for binary functions)
 (define-syntax (infix stx)
-  (void))
-
-#; (syntax->datum (expand-once #'(infix (2 * 3))))
+  (let ([sexp (second (syntax->datum stx))])
+    #`(#,(second sexp) #,(first sexp) #,(third sexp))))
 
 
 ;; define our own `if` special form (based on cond)
+;; e.g., (my-if test e1 e2)
+;;        --> (cond [test e1]
+;;                  [else e2])
+
 (define-syntax (my-if stx)
-  (void))
+  (let ([sexp (syntax->datum stx)])
+    #`(cond [#,(second sexp) #,(third sexp)]
+            [else #,(fourth sexp)])))
 
-#; (syntax->datum
-    (expand-once #'(my-if (< 1 2)
-                          (println "yes")
-                          (println "no"))))
-
-#; (syntax->datum
-    (expand #'(my-if (< 1 2)
-                     (println "yes")
-                     (println "no"))))
-
+#|----------------------------------------------------------------------------|#
 
 ;; `syntax-case` lets us pattern match on syntax objects
-(define-syntax (infix2 stx)
+(define-syntax (infix-2 stx)
   (syntax-case stx ()
     [(_ (lhs op rhs))
      #'(op lhs rhs)]))
 
 
 (define-syntax (my-if-2 stx)
-  (syntax-case stx (then otherwise) ; parentheses enclose syntax "literals"
-    [(_ test exp1 exp2) ; matched ids can be used directly in syntax forms
-     #'(cond [test exp1]
-             [else exp2])]
-    [(_ test then exp1 otherwise exp2)
-     #'(cond [test exp1]
-             [else exp2])]))
+  (syntax-case stx () 
+    [(_ test e1 e2)         ; matched ids can be used directly in syntax forms
+     #'(cond [test e1]
+             [else e2])]))
 
-#; (syntax->datum
-    (expand-once #'(my-if-2 (< 1 2)
-                            (println "yes")
-                            (println "no"))))
-
-#; (syntax->datum
-    (expand-once #'(my-if-2 (< 1 2)
-                            then (println "yes")
-                            otherwise (println "no"))))
-
+#|----------------------------------------------------------------------------|#
 
 ;; define-syntax-rule is shorthand for a limited form of `syntax-case`
-(define-syntax-rule (my-if-3 test exp1 exp2)
-  (cond [test exp1]
-        [else exp2]))
+(define-syntax-rule (infix-3 (lhs op rhs))
+  (op lhs rhs))
+
+
+(define-syntax-rule (my-if-3 test e1 e2)
+  (cond [test e1]
+        [else e2]))
 
 
 (define-syntax-rule (swap! x y)
@@ -110,11 +81,14 @@
 
 ;; define a macro that implements a loop
 (define-syntax-rule (loop n body)
-  (void))
+  (let rec ([i 0])
+    (when (< i n)
+      body
+      (rec (add1 i)))))
 
-;; can we interact with the `i` introduced in the `loop` macro from "outside"?
-#; (loop 10 (println i))
-#; (let ([i 10]) (loop i (println i)))
+
+;; Can we interact with the `i` introduced in the `loop` macro from "outside"?
+;; No, due to the "Hygenic" property of syntax transformers
 
 
 ;; define a macro that implements a "for" loop, exposing the iterator var

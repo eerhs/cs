@@ -36,7 +36,6 @@
     [_ "I don't know what this is"]))
 
 
-
 #|-----------------------------------------------------------------------------
 ;; Our language
 
@@ -103,7 +102,8 @@ Review: What is parsing?
 ;;; using Racket's reader
 #; (read)
 
-
+(define (read-string str)
+  (read (open-input-string str)))
 
 #|-----------------------------------------------------------------------------
 ;; Parser (continued)
@@ -118,29 +118,104 @@ Review: What is parsing?
 ;;; Some types for decorating our syntax tree
 
 ;; integer value
-(struct int-exp () #:transparent)
+(struct int-exp (val) #:transparent)
 
 ;; arithmetic expression
-(struct arith-exp () #:transparent)
+(struct arith-exp (op lhs rhs) #:transparent)
 
 ;; variable
-(struct var-exp () #:transparent)
+(struct var-exp (id) #:transparent)
 
 ;; let expression
-(struct let-exp () #:transparent)
+(struct let-exp (ids vals body) #:transparent)
 
 
-;; Parser
+;; Parser (recursive-descent)
 (define (parse sexp)
-  (void))
+  (match sexp
+    ;; naked integers
+    [(? integer?)
+      (int-exp sexp)]
+
+    ;; arithmetic expressions
+    [(list '+ lhs rhs)
+      (arith-exp "ADD" (parse lhs) (parse rhs))]
+    [(list '* lhs rhs)
+      (arith-exp "MUL" (parse lhs) (parse rhs))]
+
+    ;; variables
+    [(? symbol?)
+      (var-exp sexp)]
+
+    ;; let expressions (single var)
+    [(list 'let (list (list id exp)) body)
+      (let-exp (list id)
+               (list (parse exp))
+               (parse (body)))]
+    ;; let expressions (multi var)
+    [(list 'let (list (list id exp)...) body)
+      (let-exp id
+               (map (parse exp))
+               (parse (body)))]
+  ))
 
 
 #|-----------------------------------------------------------------------------
 ;; Interpreter
 
-- The interpreter's job is the take the (decorated) syntax tree and evalute it!
+- The interpreter's job is to take the (decorated) syntax tree and evalute it!
 -----------------------------------------------------------------------------|#
 
 ;; Interpreter
-(define (eval expr)
-  (void))
+(define (eval expr [env '()])
+  (match expr
+    [(int-exp val)
+      val]
+
+    [(arith-exp "ADD" lhs rhs)
+      (+ (eval lhs env) (eval rhs env))]
+    [(arith-exp "MUL" lhs rhs)
+      (* (eval lhs env) (eval rhs env))]
+
+
+    ; "strict" evaluation
+    [(var-exp id)
+      (cdr (assoc id env))]       
+
+    [(let-exp (list id)
+              (list exp)
+              body)
+    (let ([nenv (cons (cons id (eval exp env))
+                      env)])
+      (eval body nenv))]
+
+    ; "lazy" evaluation
+    [(var-exp id)
+      (eval (cdr (assoc id env)) env)]
+
+    [(let-exp (list id)
+              (list exp)
+              body)
+    (let ([nenv (cons (cons id exp)
+                      env)])
+      (eval body nenv))]
+
+
+
+    [(let-exp (list id ...)
+              (list exp ...)  
+              body)
+    (let ([nvars (map cons 
+                      id
+                      (map (lambda (e) (eval e env))
+                          exp))])
+        (eval body (append nvars env)))]
+  ))
+
+
+;; REPL
+(define (repl)
+  (let ([stx (parse (read))])
+    (when stx
+      (println (eval stx))
+      (repl))))

@@ -131,6 +131,12 @@ Some useful built-in HOFs and related functions:
            '()
            (range 5)))
 
+(define (foldr f v lst)
+  (if (empty? lst)
+    v
+    (f (first lst)
+        (foldr f v (rest (lst))))))
+
 #;
 (define (summation lst)
   (if (empty? lst)
@@ -140,11 +146,13 @@ Some useful built-in HOFs and related functions:
 
 (define summation (curry foldr + 0))
 
-(define (foldr op v lst)
-  (if (empty? lst)
-    v
-    (op (first lst)
-        (foldr op v (rest (lst))))))
+(define delayed-sum (curry foldr
+                            (lambda (x r)
+                              (delay (+ x (force r))))
+                            (delay 0)))
+
+(define product (curry foldr * 1))
+(define copy (curry foldr cons '()))
 
 ;; `foldl` examples
 #; (values
@@ -158,12 +166,23 @@ Some useful built-in HOFs and related functions:
            '()
            (range 5)))
 
-(define (foldl op acc lst)
+#;
+(define (sum-tail lst [acc o])
   (if (empty? lst)
     acc
-    (foldl op
-          (op (first lst) acc)
+    (sum-tail (rest lst)
+              (+ (first lst) acc))))
+
+(define (foldl f acc lst)
+  (if (empty? lst)
+    acc
+    (foldl f
+          (f (first lst) acc)
           (rest lst))))
+
+(define sum-tail (curry foldl + 0))
+
+;; foldl reverses the list while foldr doesn't
 
 #|-----------------------------------------------------------------------------
 ;; Lexical scope
@@ -173,3 +192,11 @@ Some useful built-in HOFs and related functions:
 
 - This leads to one of the most important ideas we'll see: the *closure*
 -----------------------------------------------------------------------------|#
+(define (simple x)
+  (let ([loc 10])
+    (* x loc)))
+
+(define (weird x)   ;; the local variable stays in scope, even when you call the lambda later 
+  (let ([loc 10])   ;; "let over" lambda
+    (lambda ()
+      (* x loc))))
