@@ -1,0 +1,75 @@
+html {
+background-color: lightgreen;
+}
+
+body {
+width: 960px;
+margin-top: 20px;
+margin-bottom: 20px;
+margin-left: auto;
+margin-right: auto;
+}
+
+nav {
+width: 170px;
+font-family: Garamond;
+position: absolute;
+margin-left: -175px;
+margin-top: 20px;
+}
+
+h1 {
+font-family: Arial;
+size: 4em;
+padding-bottom: 10px;
+}
+
+p {
+padding-bottom: 10px;
+font-family: Garamond;
+}
+
+/* Boxes to practice moving stuff around */
+div#boxes{
+font-size: 4em;
+color: white;
+text-align: center;
+}
+
+.box1 {
+width: 440px;
+background-color: rgb(0, 148, 255);
+margin: 10px 10px 10px 0px;
+padding: 10px;
+height: 200px;
+}
+
+.box2 {
+width: 220px;
+background-color: rgb(213, 228, 82);
+margin: 10px 10px 10px 0px;
+padding: 10px;
+height: 200px;
+position: absolute;
+margin-left: 470px;
+margin-top: -230px;
+}
+
+.box3 {
+width: 900px;
+background-color: rgb(0, 148, 255);
+margin: 10px 10px 10px 0px;
+padding: 10px;
+height: 200px;
+}
+
+.box4 {
+width: 180px;
+background-color: rgb(228, 154, 82);
+margin: 10px 10px 10px 0px;
+padding: 10px;
+height: 200px;
+position: absolute;
+margin-left: 720px;
+margin-top: -460px;
+}

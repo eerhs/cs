@@ -1,0 +1,46 @@
+body {
+	background-color: black;
+}
+
+p {
+	color: red;	
+}
+
+h3 {
+	color: red;
+	font-size: 150%;
+	font-weight: bold;
+	
+}
+
+.illustration {
+	width: 25%;
+	float: right;
+	padding: 10px;
+	
+}
+
+header {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+main {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#nav {
+    position: fixed;
+    margin-top: 5px;
+    right: 295px;
+	}
+
+strong {
+	font-size: 150%;
+	font-weight: bold;
+	color: red;
+	
+}

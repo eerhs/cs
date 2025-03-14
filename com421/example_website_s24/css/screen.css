@@ -1,0 +1,176 @@
+/* Example CSS page to demonstrate styles and positioning */
+/* Notice the comments and organization. This makes it easier to locate and edit styles. */
+
+html {
+height: 100%;
+}
+
+body {
+background-color: lightgray;
+min-height: 100%;
+}
+
+
+/* Div Styles */
+
+div#page {
+width: 960px;
+margin-left: 200px;
+margin-right: 200px;
+padding-left: 10px;
+background-color: white;
+}
+
+header {
+height: 155px;
+margin-bottom: 5px;
+}
+
+
+/* Paragraph styles */
+
+p.intro_paragraph {
+font-family: "Arial","sans-serif";
+font-size: 100%;
+font-style: italic;
+margin-bottom: 20px;
+padding-right: 10px;
+}
+
+p {
+font-family: "Garamond","Times New Roman","Serif";
+font-size: 125%;
+margin-bottom: 10px;
+padding-right: 10px;
+}
+
+
+/* Styles within paragraphs */
+
+em, cite {
+font-style: italic;
+}
+
+strong {
+font-weight: bold;
+}
+
+code {
+font-family: "consolas","monospace";
+font-size: 90%;
+color: gray;
+}
+
+blockquote {
+margin: 10px 45px 10px 45px;
+padding: 5px;
+background-color: lightblue;
+color: grey;
+font-style: italic;
+}
+
+
+/* Link styling */
+
+a {
+color: green;
+font-weight: bold;
+text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+background-color: lightgray;
+}
+
+
+/* Headers */
+
+h1 {
+margin-bottom: 15px;
+padding-top: 15px;
+padding-bottom: 15px;
+padding-left: 5px;
+margin-left: -10px;
+border-bottom: solid 10px gray;
+border-top: solid 10px gray;
+font-family: "Helvetica","Arial","sans-serif";
+font-size: 250%;
+background-color: lightblue;
+}
+
+section#introduction > h2 {
+margin-top: 0px;
+}
+
+h2 {
+margin-top: 50px;
+margin-bottom: 10px;
+margin-left: -10px;
+padding-left: 5px;
+font-family: "Helvetica","Arial","sans-serif";
+font-size: 150%;
+color: lightblue;
+background-color: gray;
+}
+
+.intro_paragraph+h3 {
+margin-top: 0px;
+}
+
+h3 {
+margin-top: 30px;
+margin-right: 20px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-left: -10px;
+text-align: center;
+color: gray;
+font-family: "Helvetica","Arial","sans-serif";
+font-weight: bold;
+background-color: lightblue;
+}
+
+
+/* List Styles */
+
+li {
+list-style: disc;
+margin-left: 45px;
+}
+
+ul > li > ul > li {
+list-style: circle;
+} /* These complex selectors can be formed by copying the CSS path using Chrome. I can show you this if they are useful for your project. */
+
+ul > li > ol > li  {
+list-style: decimal;
+}
+
+
+/* Image styles */
+
+img {
+display: block;
+margin-top: 20px;
+margin-right: auto;
+margin-left: auto;
+padding: 10px;
+border: dashed 3px gray;
+}
+
+section#styling {
+display: none;
+}
+
+/* Resume example styles
+   Put your resume practice styles here */
+
+/* FIRST: let's write some CSS styles that make the resume div look more like the target document. */
+/*
+div#resume h1, h2, h3, p {
+font-family: times;
+}
+*/
+

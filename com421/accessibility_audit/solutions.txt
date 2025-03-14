@@ -1,0 +1,23 @@
+There are a few issues to deal with:
+
+	* Text stored as image
+	* Missing alt attribute
+	* Nav is not in a list or the <nav> element
+	* Skipped heading level
+	* Use of <strong> for heading instead of heading element
+	* Use of deprecated element (<b> for <strong>)
+	
+
+Visual issues:
+
+	* Contrast with background color
+	* Links impossible to read on black background
+	* Headings are spaced equidistantly between blocks of content
+	
+
+Not on this page, but remember:
+
+	* Do you have a caption on tables?
+	* Have you checked for all of the deprecated HTML elements including <b>, <i>, and <u>?
+	* Are you using semantic block elements instead of generic, e.g. <div id="nav">?
+	* If you're using <em>, is it for vocal stress on text or just to make it italics? Use <cite> for titles and <strong> for warnings.

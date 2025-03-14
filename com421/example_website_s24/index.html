@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!--
+Welcome to the tutorial page for HTML5! What you are reading right now is a comment. Anything within the comment notation is ignored by a browser when it renders your webpage, so people will only see it when they inspect your code (in Chrome, ctrl-U). All you have to do is use the following notation:
+-->
+
+<!-- this is a comment -->
+
+<!--
+I'll be putting some helpful hints in the comments in this file that will guide you through creating a well-formed HTML document.
+Notice the very first line of this document. That is doctype definition for the page. It must appear just as it does above, and it must always be the first line in any HTML document. You can just copy and paste this into your webpages.
+-->
+
+<html xml:lang="en" lang="en">
+<!--The tag above is the HTML tag that encloses all HTML5 content on a page. Just like the doctype definition, it must be exactly as it is in this file and should be the second line of your file.-->
+
+<head>
+	<meta charset="utf-8" />
+<!--You need this meta tag for well-formed HTML5. Don't worry about why. That's a topic for another class. Just make sure your pages have it.-->
+
+<!--All HTML documents have two required sections: the head and body. The head contains information like:
+	* the title that appears in the browser tab and on search engine results
+	* links to the CSS documents that style the page
+	* meta tags that describe the page content
+Below are some examples
+-->
+
+<!--The title tells the browser what to write in the tab area, and tells search engines what to call the page-->
+	<title>Introduction to HTML5</title>
+
+<!--This meta tag tells search engines what to list below your site title. It's optional, but it looks good-->
+	<meta name="description" content="Introduction to HTML5." />
+	
+<!--You can included this meta tag if you would like to request that robots not index your page for search engines, though you should think about why you are posting that content on the web-->
+	<meta name="robots" content="noindex">	
+
+<!--The link elements tell the browser where to find the style sheets that control the appearance of your page-->
+	<link rel="stylesheet" type="text/css" media="screen" href="./css/h1_demo.css" />
+<!--Don't worry about CSS right now. We'll get to that soon. You'll want these link elements later when you are using CSS to style your page.-->
+
+</head>
+
+<body>
+<!--
+The body contains the content of the web page that you want displayed in the browser window. It can contain any variety of elements. There are some rules that you must follow when you are marking up your documents with HTML5:
+	1. Elements are the tags that you use to mark up your text, like so: <em>
+	2. All elements that you open must close, like so: </em>
+	3. Elements can be nested, but they must open and close in order (the most recent element must close before you close a previously opened element)
+	4. You must follow the rules of HTML5 elements in order to make well-formed HTML. Some elements are only allowed to be self closing, such as <img src="$" alt="$" /> or <br />.
+-->
+<div id="page">
+
+<header>
+<h1>An example document showing HTML elements</h1>
+	<p class="intro_paragraph">Below is an example document that illustrates most of the HTML5 elements that you will need for class. Pay attention to the specific way it is marked up, as it will help you learn the conventions of structuring a well-formed HTML5 document.</p>
+</header>
+
+<section id="introduction">
+<h2>Introduction</h2>
+	<p class="intro_paragraph">Before considering style, you must learn the anatomy of the HTML5 tags:</p>
+	<ul>
+		<li><p>An <b>element</b> is the tag that opens and closes around text that it describes.</p></li>
+		<li><p>The element closes when the same tag contains a backslash, or if it is a self-closing tag and is formatted as such.</p></li>
+		<li><p>An <b>attribute</b> is the text added to a tag to differentiate it from tags of the same variety.</p></li>
+		<li><p>The <code>id</code> attribute is used with the <code>section</code> <code>div</code> tags, while the <code>class</code> attribute is used with all other tags (when to use <code>id</code> and <code>class</code> is more complicated, but this will serve you well for now).</p></li>
+		<li><p>The <code>href</code> attribute is used with the <code>a</code> tag, while the <code>src</code> attribute is used with the <code>img</code> tag.</p></li>
+		<li><p>These are the basic concepts, and there is more to learn, but this will suffice for now. If you want to try to do more, make sure you have the basics down, then ask and I will work with you to expand on the basics.</p></li>
+	</ul>
+</section>
+<!--
+Notice the section tags above. These allow you to separate distinct content areas in your page and will later help you with styling.
+The id attribute allows you to differentiate sections on the page.
+-->
+
+<section id="list_example">
+<h2>Lists</h2>
+	<p class="intro_paragraph">A useful element set for the resume is the unordered list (the <code>ul</code> tag). You could potentially format your whole resume as a series of nested lists.</p>
+	<ul>
+		<li><p>Note that list elements are enclosed in the <code>p</code> element. The <code>p</code> element is the paragraph tag. Its name is somewhat misleading as it encloses any text you want to display as body text, whether it is a proper paragraph or not.</p></li>
+		<li><p>Nested list elements work like so:</p>
+			<ul>
+				<li><p>A nested list will have a different bullet point by default.</p></li>
+				<li><p>It also must follow the conventions of closing in order so that you might continue with the previous list if you wish.</p></li>
+				<li><p>Notice how, rather than closing before the nested list, the list element containing this nested list closes below.</p></li>
+			</ul>
+		</li><!--the container <li> element closes right here, since elements must close in the order they open-->
+		<li><p>You may also use ordered lists (the <code>ol</code> tag), whether nested or at the top-level:</p>
+			<ol>
+				<li><p>The first element will have a "1" in front of it.</p></li>
+				<li><p>The second, a "2", and so on.</p></li>
+				<li><p>Again, notice how the nested list closes out before the previous list element.</p></li>
+			</ol>
+		</li>
+		<li><p>You can style your bullet point types (we'll get to that with CSS).</p></li>
+	</ul>
+</section>
+
+<section id="paragraph_example">
+<h2>Paragraphs</h2>
+	
+	<p class="intro_paragraph">Paragraphs or resumes allow for a number of semantic elements that make structurally strong documents. Below is a paragraph that has been marked up to show you these elements at work.</p>
+	
+	<p>The first paragraph in this document can be styled differently from other paragraphs due to the combination of the <code>intro_paragraph</code> attribute and CSS selector, which we will get to when we cover CSS. Within paragraphs, there are a few important tags you will want to use. Sometimes, you will want to make certain text strong to make it stand out, like "when leaving the chamber, <strong>you must decontaminate!</strong>"; the <code>strong</code> tag  will, by default, create bolded text; use it for text that is more important than other text. Likewise, you will want to emphasize certain phrases; the <code>em</code> tag, by default, will italicize that text and is used for text that deserves emphasis, like "I want <em>that</em> one, daddy!". If you want to put something in a block quote, there's a tag for that:</p>
+		
+		<blockquote>
+		<p>This is some really important text that you want to stand out, or maybe a long passage that needs to be separated from the body paragraph.</p>
+		</blockquote>
+	
+	<p>If you want to reference the title of a publication, such as <cite>The Essentials of Technical Communication</cite>, use the <code>cite</code> tag; it is different from the emphasis tag because it denotes a book or publication title, not emphasized text.</p>
+	
+	<p>Avoid junk code such as the <code>span</code> tag, which doesn't do anything except define styles for a block of text. Likewise, do not use non-breaking space characters like so &nbsp; to space your text out (use CSS instead). 
+	
+	<p>When we learn how to reset default browser styling, you will need to add in to your CSS file styles for all these tags. For now, just think about how the default styles relate to the tags.</p>
+</section>
+
+<section id="link_example">
+<h2>Links</h2>
+
+	<p class="intro_paragraph">The ability to link to other websites, documents, and objects is what that makes this document "hypertext," so lets look at hyperlinks and image tags:</p>
+	
+	<h3>Hyperlinks</h3>
+		
+		<p>Hyperlinks use the <code>a</code> tag and include the <code>href</code> attribute that points to the file or webpage you want text to link to. The text enclosed in the element is the "link" that you click on. For example, <a href="http://google.com">this is a link to Google</a>. If you want to link to another page on your site, you can use a "relative link"; for example, <a href="./example_folder">this is a link to the index.html file in the example folder</a><!--Note: this will only work if you are running XAMPP, otherwise you will see a default index page in your browser-->. The <code>a</code> tag is also used in your site navigation (the navigation div is just a list of links).</p>
+
+	<h3>Images</h3>
+	
+		<p>You can add images directly into your page by using the <code>img</code> tag (note how it is self-closing). The <code>src</code> attribute points to the location of the image file. Use the <code>alt</code> attribute to provide information about the image for persons with low or no vision using screen readers.</p>
+		
+		<img src="./images/IIT_Logo_stack_186_blk.png" alt="The Illinois Institute of Technology logo" />
+		
+</section>
+
+<section id="validation">
+<h2>Validating your page</h2>
+
+	<p class="intro_paragraph">Once you have marked up your page, it's time to make sure it is well-formed HTML5. Badly-formed HTML5 will result in parsing errors and your page may render incorrectly in the browser. Below are links to the W3C validator that you can use when marking up your resume.</p>
+	
+	<ul>
+		<li><p><a href="http://validator.w3.org/">This page</a> is the validator itself, and you can pass your page to it as either a file upload or a URL on your myPages site.</p></li>
+		<li><p><a href="http://validator.w3.org/check?uri=referer">This link</a> can be embedded on your site when it is live on myPages, and you can click on it to validate the current page. There are various badges available for well-formed pages that you can display with this link to show others that you took the time to craft standards-compliant HTML5.</p></li>
+	</ul>
+
+</section>
+
+<section id="styling">
+	<h2>Why structure is kept separate from styling?</h2>
+	
+	<p class="intro_paragraph">Notice the styling of these two items:</p>
+	
+	<div id="h1_demo">
+		<h3>A heading in the h3 style -- <em>according to the browser's default style</em></h3>
+
+		<h1>A heading in the h1 style -- <em>defined by CSS</em></h1>
+	</div>
+	
+	<p>Question: What does HTML have to do with the style of text or objects on a webpage?</p> <!--Answer: nothing. You define all the styles using CSS. HTML is only for structuring the document, not styling the text or appearance.-->
+
+</section>
+
+</div>
+</body>
+</html>
+
+
